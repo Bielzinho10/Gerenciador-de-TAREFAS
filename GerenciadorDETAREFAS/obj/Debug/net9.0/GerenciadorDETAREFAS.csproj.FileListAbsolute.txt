@@ -1,0 +1,15 @@
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\GerenciadorDETAREFAS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\GerenciadorDETAREFAS.AssemblyInfoInputs.cache
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\GerenciadorDETAREFAS.AssemblyInfo.cs
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\GerenciadorDETAREFAS.csproj.CoreCompileInputs.cache
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\GerenciadorDETAREFAS.sourcelink.json
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\bin\Debug\net9.0\GerenciadorDETAREFAS.exe
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\bin\Debug\net9.0\GerenciadorDETAREFAS.deps.json
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\bin\Debug\net9.0\GerenciadorDETAREFAS.runtimeconfig.json
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\bin\Debug\net9.0\GerenciadorDETAREFAS.dll
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\bin\Debug\net9.0\GerenciadorDETAREFAS.pdb
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\GerenciadorDETAREFAS.dll
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\refint\GerenciadorDETAREFAS.dll
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\GerenciadorDETAREFAS.pdb
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\GerenciadorDETAREFAS.genruntimeconfig.cache
+C:\Users\Alunos\Documents\gabriel\Gerenciador-de-TAREFAS\GerenciadorDETAREFAS\obj\Debug\net9.0\ref\GerenciadorDETAREFAS.dll
