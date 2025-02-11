@@ -1,49 +1,62 @@
+// Layout.cs
 using System;
 
-namespace Layout
+public static class Layout
 {
-    public static class Formatacao
+    // Método para exibir o cabeçalho
+    public static void ExibirCabecalho()
     {
-        // Método para exibir mensagem com cor
-        public static void Cor(string mensagem, ConsoleColor cor)
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\n========================");
+        Console.WriteLine("  Gerenciador de Tarefas");
+        Console.WriteLine("========================");
+        Tarefa.ResetarCor();
+    }
+
+    // Método para exibir o menu de opções
+    public static void ExibirMenu()
+    {
+        Console.WriteLine("\nEscolha uma opção:");
+        Console.WriteLine("1. Adicionar tarefa");
+        Console.WriteLine("2. Listar tarefas");
+        Console.WriteLine("3. Concluir tarefa");
+        Console.WriteLine("4. Remover tarefa");
+        Console.WriteLine("5. Sair");
+        Console.Write("Opção: ");
+    }
+
+    // Método para exibir uma mensagem de sucesso
+    public static void ExibirMensagemSucesso(string mensagem)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(mensagem);
+        Tarefa.ResetarCor();
+    }
+
+    // Método para exibir uma mensagem de erro
+    public static void ExibirMensagemErro(string mensagem)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(mensagem);
+        Tarefa.ResetarCor();
+    }
+
+    // Método para exibir uma lista de tarefas
+    public static void ExibirTarefas(List<Tarefa> tarefas)
+    {
+        Console.WriteLine("\nLista de Tarefas:");
+        if (tarefas.Count == 0)
         {
-            if (string.IsNullOrEmpty(mensagem))
+            ExibirMensagemErro("Nenhuma tarefa cadastrada.");
+        }
+        else
+        {
+            for (int i = 0; i < tarefas.Count; i++)
             {
-                Console.WriteLine("Mensagem vazia ou nula.");
-                return;
+                Console.WriteLine($"{i + 1}. {tarefas[i]}");
             }
-            Console.ForegroundColor = cor;
-            Console.WriteLine(mensagem);
-            Console.ResetColor();
         }
-
-        // Método para exibir mensagem com cor de fundo e texto
-        public static void CorFundo(string mensagem, ConsoleColor corTexto, ConsoleColor corFundo)
-        {
-            if (string.IsNullOrEmpty(mensagem))
-            {
-                Console.WriteLine("Mensagem vazia ou nula.");
-                return;
-            }
-
-            Console.BackgroundColor = corFundo;
-            Console.ForegroundColor = corTexto;
-            Console.WriteLine(mensagem);
-            Console.ResetColor();
-        }
-
-        // Método para exibir uma linha com cor personalizada
-        public static void Linha(ConsoleColor cor)
-        {
-            Console.ForegroundColor = cor;
-            Console.WriteLine(new string('-', Console.WindowWidth - 1));
-            Console.ResetColor();
-        }
-
-        // Método para exibir a mensagem com "negrito" (simulação)
-        public static void Negrito(string mensagem)
-        {
-            Cor(mensagem.ToUpper(), ConsoleColor.White); // Simula o negrito com maiúsculas
-        }
+        Tarefa.ResetarCor();
     }
 }

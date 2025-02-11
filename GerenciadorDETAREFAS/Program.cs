@@ -1,87 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using Layout;      // Usando a classe Layout para formatação
-using GerenciamentoDeTarefas;  // Usando a classe GerenciarTarefas para manipulação das tarefas
+﻿// Program.cs
+using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Inicializa o sistema de gerenciamento de tarefas
-        GerenciarTarefas gerenciador = new GerenciarTarefas(); // Corrigido: inicializando corretamente
+        GerenciadorDeTarefas gerenciador = new GerenciadorDeTarefas();
 
         while (true)
         {
-            // Exibe o menu interativo
-            Console.Clear();
-            Console.WriteLine("Sistema de Gerenciamento de Tarefas");
-            Console.WriteLine("1 - Adicionar Tarefa");
-            Console.WriteLine("2 - Listar Tarefas");
-            Console.WriteLine("3 - Marcar Tarefa como Concluída");
-            Console.WriteLine("4 - Editar Tarefa");
-            Console.WriteLine("5 - Excluir Tarefa");
-            Console.WriteLine("6 - Exibir Mensagem Colorida");
-            Console.WriteLine("0 - Sair");
-            Console.Write("Escolha uma opção: ");
-            
-         Console.Write("Escolha uma opção: ");
-string opcao = Console.ReadLine();  // Usando ReadLine para capturar a opção do usuário
+            Layout.ExibirCabecalho();
+            Layout.ExibirMenu();
+            string opcao = Console.ReadLine();
 
-
-            // Tratamento de entrada inválida para o menu
-            if (!int.TryParse(opcao, out int escolha) || escolha < 0 || escolha > 6)
+            switch (opcao)
             {
-                Console.WriteLine("Opção inválida. Tente novamente.");
-                Console.WriteLine("\nPressione qualquer tecla para continuar...");
-                Console.ReadKey();
-                continue;
-            }
-
-            switch (escolha)
-            {
-                case 1:
-                    // Adicionar tarefa
-                    gerenciador.AdicionarTarefa();
+                case "1":
+                    Console.Write("Digite a descrição da tarefa: ");
+                    string descricao = Console.ReadLine();
+                    gerenciador.AdicionarTarefa(descricao);
                     break;
 
-                case 2:
-                    // Listar tarefas
+                case "2":
                     gerenciador.ListarTarefas();
                     break;
 
-                case 3:
-                    // Marcar tarefa como concluída
-                    gerenciador.MarcarTarefaConcluida();
+                case "3":
+                    Console.Write("Digite o número da tarefa a ser concluída: ");
+                    if (int.TryParse(Console.ReadLine(), out int indexConcluir))
+                    {
+                        gerenciador.ConcluirTarefa(indexConcluir - 1); // Subtrai 1 porque o usuário verá a tarefa começando do número 1.
+                    }
+                    else
+                    {
+                        Layout.ExibirMensagemErro("Entrada inválida!");
+                    }
                     break;
 
-                case 4:
-                    // Editar tarefa
-                    gerenciador.EditarTarefa();
+                case "4":
+                    Console.Write("Digite o número da tarefa a ser removida: ");
+                    if (int.TryParse(Console.ReadLine(), out int indexRemover))
+                    {
+                        gerenciador.RemoverTarefa(indexRemover - 1); // Subtrai 1 porque o usuário verá a tarefa começando do número 1.
+                    }
+                    else
+                    {
+                        Layout.ExibirMensagemErro("Entrada inválida!");
+                    }
                     break;
 
-                case 5:
-                    // Excluir tarefa
-                    gerenciador.ExcluirTarefa();
-                    break;
-
-                case 6:
-                    // Exibir mensagem colorida
-                    gerenciador.ExibirMensagemColorida();
-                    break;
-
-                case 0:
-                    // Sair
-                    Console.WriteLine("Saindo...");
+                case "5":
+                    Layout.ExibirMensagemSucesso("Saindo do programa...");
+                    System.Threading.Thread.Sleep(1000); // 1 segundo para o usuário ler a mensagem
                     return;
 
                 default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    Layout.ExibirMensagemErro("Opção inválida, tente novamente.");
                     break;
             }
-
-            // Pausa a execução até que o usuário pressione uma tecla
-            Console.WriteLine("\nPressione qualquer tecla para continuar...");
-            Console.ReadKey();
         }
     }
 }

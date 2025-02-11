@@ -1,35 +1,40 @@
-namespace GerenciamentoDeTarefas
+// Tarefa.cs
+using System;
+
+public class Tarefa
 {
-    public class Tarefa
+    public string Descricao { get; set; }
+    public bool Concluida { get; set; }
+
+    public Tarefa(string descricao)
     {
-        public string Descricao { get; set; }  // Descrição da tarefa
-        public bool Concluida { get; set; }    // Status de conclusão da tarefa
+        Descricao = descricao;
+        Concluida = false;
+    }
 
-        // Construtor da classe Tarefa
-        public Tarefa(string descricao)
-        {
-            Descricao = descricao;
-            Concluida = false; // A tarefa começa como não concluída
-        }
+    public void Concluir()
+    {
+        Concluida = true;
+    }
 
-        // Método para exibir as informações da tarefa
-        public void Exibir()
+    // Método ToString com cores
+    public override string ToString()
+    {
+        if (Concluida)
         {
-            Console.WriteLine($"{Descricao} - {(Concluida ? "Concluída" : "Pendente")}");
+            Console.ForegroundColor = ConsoleColor.Green;
+            return $"{Descricao} - Concluída";
         }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            return $"{Descricao} - Pendente";
+        }
+    }
 
-        // Método para marcar a tarefa como concluída
-        public void MarcarComoConcluida()
-        {
-            Concluida = true;
-            Console.WriteLine("Tarefa marcada como concluída.");
-        }
-
-        // Método para editar a descrição da tarefa
-        public void EditarDescricao(string novaDescricao)
-        {
-            Descricao = novaDescricao;
-            Console.WriteLine("Descrição da tarefa alterada com sucesso.");
-        }
+    // Método para resetar a cor do texto após cada tarefa
+    public static void ResetarCor()
+    {
+        Console.ResetColor();
     }
 }
