@@ -1,120 +1,59 @@
-// GerenciadorDeTarefas.cs
 using System;
 using System.Collections.Generic;
-using System.IO;
 
-public class GerenciadorDeTarefas
+namespace GerenciarTarefa
 {
-    private List<Tarefa> tarefas;
-    private const string CaminhoArquivo = "tarefas.txt";
-
-    public GerenciadorDeTarefas()
+    public class Gerenciar
     {
-        tarefas = CarregarTarefas();
-    }
+        private static List<Tarefas.Tarefa> tarefas = new List<Tarefas.Tarefa>();
+        private static int contadorId = 1;
 
-    // Adicionar tarefa
-    public void AdicionarTarefa(string descricao)
-    {
-        Tarefa novaTarefa = new Tarefa(descricao);
-        tarefas.Add(novaTarefa);
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("Tarefa adicionada!");
-        Tarefa.ResetarCor();
-        SalvarTarefas();
-    }
-
-    // Listar tarefas
-    public void ListarTarefas()
-    {
-        Console.WriteLine("\nLista de Tarefas:");
-        if (tarefas.Count == 0)
+        // Método para adicionar uma tarefa
+        public static void AdicionarTarefa(string descricao)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Nenhuma tarefa cadastrada.");
-            Tarefa.ResetarCor();
+            var tarefa = new Tarefas.Tarefa(contadorId++, descricao);
+            tarefas.Add(tarefa);
+            Console.WriteLine("Tarefa adicionada com sucesso!");
         }
-        else
+
+        // Método para concluir uma tarefa
+        public static void ConcluirTarefa(int id)
         {
-            for (int i = 0; i < tarefas.Count; i++)
+            var tarefa = tarefas.Find(t => t.Id == id);
+            if (tarefa != null)
             {
-                Console.WriteLine($"{i + 1}. {tarefas[i]}");
+                tarefa.Concluida = true;
+                Console.WriteLine("Tarefa concluída!");
+            }
+            else
+            {
+                Console.WriteLine("Tarefa não encontrada!");
             }
         }
-        Tarefa.ResetarCor();
-    }
 
-    // Concluir tarefa
-    public void ConcluirTarefa(int index)
-    {
-        if (index >= 0 && index < tarefas.Count)
+        // Método para listar as tarefas
+        public static void ListarTarefas()
         {
-            tarefas[index].Concluir();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Tarefa concluída!");
-            Tarefa.ResetarCor();
-            SalvarTarefas();
-        }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Índice inválido!");
-            Tarefa.ResetarCor();
-        }
-    }
-
-    // Remover tarefa
-    public void RemoverTarefa(int index)
-    {
-        if (index >= 0 && index < tarefas.Count)
-        {
-            tarefas.RemoveAt(index);
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("Tarefa removida!");
-            Tarefa.ResetarCor();
-            SalvarTarefas();
-        }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Índice inválido!");
-            Tarefa.ResetarCor();
-        }
-    }
-
-    // Salvar tarefas no arquivo
-    private void SalvarTarefas()
-    {
-        using (StreamWriter writer = new StreamWriter(CaminhoArquivo))
-        {
+            Console.WriteLine("Tarefas:");
             foreach (var tarefa in tarefas)
             {
-                writer.WriteLine($"{tarefa.Descricao}|{tarefa.Concluida}");
+                tarefa.ExibirTarefa();
             }
         }
-    }
 
-    // Carregar tarefas do arquivo
-    private List<Tarefa> CarregarTarefas()
-    {
-        List<Tarefa> tarefasCarregadas = new List<Tarefa>();
-
-        if (File.Exists(CaminhoArquivo))
+        // Método para remover uma tarefa
+        public static void RemoverTarefa(int id)
         {
-            var linhas = File.ReadAllLines(CaminhoArquivo);
-            foreach (var linha in linhas)
+            var tarefa = tarefas.Find(t => t.Id == id);
+            if (tarefa != null)
             {
-                var dados = linha.Split('|');
-                if (dados.Length == 2)
-                {
-                    var descricao = dados[0];
-                    var concluida = bool.Parse(dados[1]);
-                    Tarefa tarefa = new Tarefa(descricao) { Concluida = concluida };
-                    tarefasCarregadas.Add(tarefa);
-                }
+                tarefas.Remove(tarefa);
+                Console.WriteLine("Tarefa removida com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Tarefa não encontrada!");
             }
         }
-
-        return tarefasCarregadas;
     }
 }

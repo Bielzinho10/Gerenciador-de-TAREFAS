@@ -1,62 +1,23 @@
-// Layout.cs
 using System;
 
-public static class Layout
+namespace Layout
 {
-    // Método para exibir o cabeçalho
-    public static void ExibirCabecalho()
+    public class Formatação
     {
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("\n========================");
-        Console.WriteLine("  Gerenciador de Tarefas");
-        Console.WriteLine("========================");
-        Tarefa.ResetarCor();
-    }
-
-    // Método para exibir o menu de opções
-    public static void ExibirMenu()
-    {
-        Console.WriteLine("\nEscolha uma opção:");
-        Console.WriteLine("1. Adicionar tarefa");
-        Console.WriteLine("2. Listar tarefas");
-        Console.WriteLine("3. Concluir tarefa");
-        Console.WriteLine("4. Remover tarefa");
-        Console.WriteLine("5. Sair");
-        Console.Write("Opção: ");
-    }
-
-    // Método para exibir uma mensagem de sucesso
-    public static void ExibirMensagemSucesso(string mensagem)
-    {
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine(mensagem);
-        Tarefa.ResetarCor();
-    }
-
-    // Método para exibir uma mensagem de erro
-    public static void ExibirMensagemErro(string mensagem)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(mensagem);
-        Tarefa.ResetarCor();
-    }
-
-    // Método para exibir uma lista de tarefas
-    public static void ExibirTarefas(List<Tarefa> tarefas)
-    {
-        Console.WriteLine("\nLista de Tarefas:");
-        if (tarefas.Count == 0)
+        // Método para imprimir mensagens coloridas
+        public static void Cor(string mensagem, ConsoleColor cor)
         {
-            ExibirMensagemErro("Nenhuma tarefa cadastrada.");
+            Console.ForegroundColor = cor;
+            Console.WriteLine(mensagem);
+            Console.ResetColor();
         }
-        else
+
+        // Método para imprimir o cabeçalho
+        public static void ImprimirCabecalho()
         {
-            for (int i = 0; i < tarefas.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {tarefas[i]}");
-            }
+            Console.Clear();
+            Cor("=== Sistema de Gestão de Tarefas ===", ConsoleColor.Green);
+            Console.WriteLine("=====================================");
         }
-        Tarefa.ResetarCor();
     }
 }

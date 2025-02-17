@@ -1,40 +1,22 @@
-// Tarefa.cs
-using System;
-
-public class Tarefa
+namespace Tarefas
 {
-    public string Descricao { get; set; }
-    public bool Concluida { get; set; }
-
-    public Tarefa(string descricao)
+    public class Tarefa
     {
-        Descricao = descricao;
-        Concluida = false;
-    }
+        public int Id { get; set; }
+        public string Descricao { get; set; }
+        public bool Concluida { get; set; }
 
-    public void Concluir()
-    {
-        Concluida = true;
-    }
-
-    // Método ToString com cores
-    public override string ToString()
-    {
-        if (Concluida)
+        public Tarefa(int id, string descricao)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            return $"{Descricao} - Concluída";
+            Id = id;
+            Descricao = descricao;
+            Concluida = false;
         }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            return $"{Descricao} - Pendente";
-        }
-    }
 
-    // Método para resetar a cor do texto após cada tarefa
-    public static void ResetarCor()
-    {
-        Console.ResetColor();
+        public void ExibirTarefa()
+        {
+            string status = Concluida ? "Concluída" : "Pendente";
+            Console.WriteLine($"ID: {Id} | Descrição: {Descricao} | Status: {status}");
+        }
     }
 }

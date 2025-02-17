@@ -1,62 +1,78 @@
-﻿// Program.cs
-using System;
+﻿using System;
+using Layout;
+using GerenciarTarefa;
 
-class Program
+namespace SistemaDeTarefas
 {
-    static void Main()
+    class Program
     {
-        GerenciadorDeTarefas gerenciador = new GerenciadorDeTarefas();
-
-        while (true)
+        static void Main(string[] args)
         {
-            Layout.ExibirCabecalho();
-            Layout.ExibirMenu();
-            string opcao = Console.ReadLine();
+            bool continuar = true;
 
-            switch (opcao)
+            while (continuar)
             {
-                case "1":
-                    Console.Write("Digite a descrição da tarefa: ");
-                    string descricao = Console.ReadLine();
-                    gerenciador.AdicionarTarefa(descricao);
-                    break;
+                // Exibir cabeçalho
+                Formatação.ImprimirCabecalho();
+                
+                // Menu de opções
+                Console.WriteLine("1. Adicionar Tarefa");
+                Console.WriteLine("2. Concluir Tarefa");
+                Console.WriteLine("3. Listar Tarefas");
+                Console.WriteLine("4. Remover Tarefa");
+                Console.WriteLine("5. Sair");
+                Console.Write("Escolha uma opção: ");
+                var opcao = Console.ReadLine();
 
-                case "2":
-                    gerenciador.ListarTarefas();
-                    break;
+                switch (opcao)
+                {
+                    case "1":
+                        // Adicionar Tarefa
+                        Console.Write("Digite a descrição da tarefa: ");
+                        string descricao = Console.ReadLine();
+                        GerenciarTarefa.Gerenciar.AdicionarTarefa(descricao);
+                        break;
 
-                case "3":
-                    Console.Write("Digite o número da tarefa a ser concluída: ");
-                    if (int.TryParse(Console.ReadLine(), out int indexConcluir))
-                    {
-                        gerenciador.ConcluirTarefa(indexConcluir - 1); // Subtrai 1 porque o usuário verá a tarefa começando do número 1.
-                    }
-                    else
-                    {
-                        Layout.ExibirMensagemErro("Entrada inválida!");
-                    }
-                    break;
+                    case "2":
+                        // Concluir Tarefa
+                        Console.Write("Digite o ID da tarefa a concluir: ");
+                        if (int.TryParse(Console.ReadLine(), out int idConcluir))
+                        {
+                            GerenciarTarefa.Gerenciar.ConcluirTarefa(idConcluir);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ID inválido.");
+                        }
+                        break;
 
-                case "4":
-                    Console.Write("Digite o número da tarefa a ser removida: ");
-                    if (int.TryParse(Console.ReadLine(), out int indexRemover))
-                    {
-                        gerenciador.RemoverTarefa(indexRemover - 1); // Subtrai 1 porque o usuário verá a tarefa começando do número 1.
-                    }
-                    else
-                    {
-                        Layout.ExibirMensagemErro("Entrada inválida!");
-                    }
-                    break;
+                    case "3":
+                        // Listar Tarefas
+                        GerenciarTarefa.Gerenciar.ListarTarefas();
+                        break;
 
-                case "5":
-                    Layout.ExibirMensagemSucesso("Saindo do programa...");
-                    System.Threading.Thread.Sleep(1000); // 1 segundo para o usuário ler a mensagem
-                    return;
+                    case "4":
+                        // Remover Tarefa
+                        Console.Write("Digite o ID da tarefa a remover: ");
+                        if (int.TryParse(Console.ReadLine(), out int idRemover))
+                        {
+                            GerenciarTarefa.Gerenciar.RemoverTarefa(idRemover);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ID inválido.");
+                        }
+                        break;
 
-                default:
-                    Layout.ExibirMensagemErro("Opção inválida, tente novamente.");
-                    break;
+                    case "5":
+                        // Sair
+                        continuar = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Opção inválida! Tente novamente.");
+                        break;
+                }
             }
         }
     }
